@@ -1,0 +1,11 @@
+# Object file
+*.o
+*.cfg
+
+# Ada Library Information
+*.ali
+.env
+__pycache__
+source
+Lib
+Scripts
