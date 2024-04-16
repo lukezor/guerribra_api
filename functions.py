@@ -3,6 +3,8 @@ import json
 
 #request url
 url = "https://api.tibiadata.com"
+all_players = []
+guerribro_players = []
 
 def get_players_guerribro():
     response = requests.get(url+"/v4/guild/Guerribro")
@@ -31,9 +33,25 @@ def get_all_players_with_guilds():
             player["guild"] = "none"
     return players
 
-def get_all_players():
+# def get_all_players():
+#     response = requests.get(url+"/v4/world/Guerribra")
+#     data = json.loads(response.content) 
+#     players = data["world"]["online_players"]
+#     players.sort(reverse=True,key=lambda x: x["level"])
+#     return players
+
+def update_online_time():
+    global all_players
     response = requests.get(url+"/v4/world/Guerribra")
     data = json.loads(response.content) 
     players = data["world"]["online_players"]
     players.sort(reverse=True,key=lambda x: x["level"])
+    for player in players:
+        if not all_players:
+            player["online_time"] = 0
+            
+        for single_player in all_players:
+            if player["name"] == single_player["name"]:
+                player["online_time"] = player["online_time"] + 15
+                break
     return players

@@ -1,12 +1,12 @@
 import uvicorn
 from fastapi import FastAPI, BackgroundTasks
-from functions import get_players_guerribro, get_all_players_with_guilds, get_all_players
+from functions import get_players_guerribro, get_all_players_with_guilds, update_online_time
 
 app = FastAPI(title='Tibia - Guerribra')
 
 @app.get('/')
 def index():
-    return get_all_players()
+    return update_online_time()
 
 @app.get('/guerribro')
 def index():
